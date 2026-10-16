@@ -1,22 +1,41 @@
 import { Module } from '@nestjs/common';
-import { createObserveModule } from '@nestjs/observe';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
-import { PrismaService } from './prisma/prisma.service.js';
-
-export const { ObserveModule, ObserveInstrument } = createObserveModule();
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { PrismaModule } from './prisma/prisma.module.js';
+import { ProfileModule } from './profile/profile.module.js';
+import { SkillModule } from './skill/skill.module.js';
+import { SkillService } from './skill/skill.service.js';
+import { ExperienceModule } from './experience/experience.module.js';
+import { ExperienceService } from './experience/experience.service.js';
+import { ProjectModule } from './project/project.module.js';
+import { ProjectService } from './project/project.service.js';
+import { createLoaders } from './common/dataloader/create-loaders.js';
 
 @Module({
   imports: [
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'digital-business-card',
+    PrismaModule,
+    ProfileModule,
+    SkillModule,
+    ExperienceModule,
+    ProjectModule,
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      imports: [SkillModule, ExperienceModule, ProjectModule],
+      inject: [SkillService, ExperienceService, ProjectService],
+      useFactory: (
+        skillService: SkillService,
+        experienceService: ExperienceService,
+        projectService: ProjectService,
+      ) => ({
+        autoSchemaFile: true,
+        sortSchema: true,
+        plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+        context: () => ({
+          loaders: createLoaders(skillService, experienceService, projectService),
+        }),
+      }),
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, PrismaService],
 })
 export class AppModule {}

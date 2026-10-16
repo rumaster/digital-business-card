@@ -21,13 +21,13 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY package*.json ./
-COPY prisma ./prisma/
-COPY prisma.config.ts ./
 
-RUN npm ci --omit=dev \
-    && npx prisma generate
+RUN npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src/generated ./src/generated
+COPY prisma ./prisma/
+COPY prisma.config.ts ./
 
 COPY docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
