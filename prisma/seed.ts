@@ -10,11 +10,11 @@ async function main() {
     update: {},
     create: {
       slug: 'main',
-      name: 'Ваше Имя',
+      name: 'Yuriy Vermenko',
       description:
         'Backend-разработчик, специализируюсь на Node.js, NestJS и GraphQL API.',
-      githubUrl: 'https://github.com/your-username',
-      linkedinUrl: 'https://linkedin.com/in/your-profile',
+      githubUrl: 'https://github.com/rumaster',
+      linkedinUrl: 'https://linkedin.com/in/yuriy-vermenko-2958a882',
     },
   });
 
