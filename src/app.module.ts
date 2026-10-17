@@ -30,6 +30,7 @@ import { createLoaders } from './common/dataloader/create-loaders.js';
       ) => ({
         autoSchemaFile: true,
         sortSchema: true,
+        graphiql: false,
         plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
         context: () => ({
           loaders: createLoaders(skillService, experienceService, projectService),
