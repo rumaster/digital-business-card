@@ -14,13 +14,13 @@ export class Profile {
   @Field()
   description!: string;
 
-  @Field(() => String,{ nullable: true })
+  @Field(() => String, { nullable: true })
   githubUrl?: string | null;
 
-  @Field(() => String,{ nullable: true })
+  @Field(() => String, { nullable: true })
   linkedinUrl?: string | null;
 
-  @Field(() => String,{ nullable: true })
+  @Field(() => String, { nullable: true })
   websiteUrl?: string | null;
 
   @Field(() => [Skill])

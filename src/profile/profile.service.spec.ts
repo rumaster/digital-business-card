@@ -15,16 +15,13 @@ describe('ProfileService', () => {
     };
 
     const moduleRef = await Test.createTestingModule({
-      providers: [
-        ProfileService,
-        { provide: PrismaService, useValue: prisma },
-      ],
+      providers: [ProfileService, { provide: PrismaService, useValue: prisma }],
     }).compile();
 
     service = moduleRef.get(ProfileService);
   });
 
- describe('getProfile', () => {
+  describe('getProfile', () => {
     it('returns the profile when one exists', async () => {
       const profile = {
         id: 'profile-1',

@@ -33,7 +33,11 @@ import { createLoaders } from './common/dataloader/create-loaders.js';
         graphiql: false,
         plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
         context: () => ({
-          loaders: createLoaders(skillService, experienceService, projectService),
+          loaders: createLoaders(
+            skillService,
+            experienceService,
+            projectService,
+          ),
         }),
       }),
     }),

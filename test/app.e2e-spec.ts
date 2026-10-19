@@ -10,9 +10,7 @@ describe('GraphQL /graphql - profile query (e2e)', () => {
   let app: INestApplication<App>;
   let prisma: PrismaService;
   let profileId: string;
-  let existingProfiles: Awaited<
-    ReturnType<typeof snapshotProfiles>
-  > = [];
+  let existingProfiles: Awaited<ReturnType<typeof snapshotProfiles>> = [];
   const slug = `e2e-${randomUUID()}`;
 
   function snapshotProfiles(client: PrismaService) {
@@ -76,9 +74,7 @@ describe('GraphQL /graphql - profile query (e2e)', () => {
         data: {
           ...profileData,
           skills: {
-            create: skills.map(
-              ({ id: _id, profileId: _profileId, ...s }) => s,
-            ),
+            create: skills.map(({ id: _id, profileId: _profileId, ...s }) => s),
           },
           experience: {
             create: experience.map(

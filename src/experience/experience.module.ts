@@ -3,6 +3,6 @@ import { ExperienceService } from './experience.service.js';
 
 @Module({
   providers: [ExperienceService],
-  exports: [ExperienceService]
+  exports: [ExperienceService],
 })
 export class ExperienceModule {}

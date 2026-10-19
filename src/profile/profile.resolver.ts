@@ -1,4 +1,10 @@
-import { Context, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Context,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { ProfileService } from './profile.service.js';
 import { Profile } from './models/profile.model.js';
 import { Skill } from '../skill/models/skill.model.js';

@@ -21,8 +21,7 @@ function makeServices() {
 
 describe('createLoaders', () => {
   it('batches concurrent .load() calls into a single service call (no N+1)', async () => {
-    const { skillService, experienceService, projectService } =
-      makeServices();
+    const { skillService, experienceService, projectService } = makeServices();
     vi.mocked(skillService.findManyByProfileIds).mockResolvedValue([
       { id: 's1', name: 'TypeScript', profileId: 'p1' },
       { id: 's2', name: 'GraphQL', profileId: 'p2' },
@@ -49,14 +48,12 @@ describe('createLoaders', () => {
   });
 
   it('groups rows by profileId and preserves the key order/shape', async () => {
-    const { skillService, experienceService, projectService } =
-      makeServices();
+    const { skillService, experienceService, projectService } = makeServices();
 
     vi.mocked(skillService.findManyByProfileIds).mockResolvedValue([
       { id: 's2', name: 'GraphQL', profileId: 'p2' },
       { id: 's1', name: 'TypeScript', profileId: 'p1' },
       { id: 's1b', name: 'NestJS', profileId: 'p1' },
-
     ]);
 
     const loaders = createLoaders(
@@ -76,16 +73,13 @@ describe('createLoaders', () => {
       { id: 's1b', name: 'NestJS', profileId: 'p1' },
     ]);
 
-    expect(p2Skills).toEqual([
-      { id: 's2', name: 'GraphQL', profileId: 'p2' },
-    ]);
+    expect(p2Skills).toEqual([{ id: 's2', name: 'GraphQL', profileId: 'p2' }]);
 
     expect(p3Skills).toEqual([]);
   });
 
   it('keeps each entity type on its own loader and service', async () => {
-    const { skillService, experienceService, projectService } =
-      makeServices();
+    const { skillService, experienceService, projectService } = makeServices();
     vi.mocked(skillService.findManyByProfileIds).mockResolvedValue([]);
     vi.mocked(experienceService.findManyByProfileIds).mockResolvedValue([]);
     vi.mocked(projectService.findManyByProfileIds).mockResolvedValue([]);
@@ -112,8 +106,7 @@ describe('createLoaders', () => {
   });
 
   it('caches repeated loads for the same key within one request', async () => {
-    const { skillService, experienceService, projectService } =
-      makeServices();
+    const { skillService, experienceService, projectService } = makeServices();
     vi.mocked(skillService.findManyByProfileIds).mockResolvedValue([]);
 
     const loaders = createLoaders(
@@ -129,10 +122,13 @@ describe('createLoaders', () => {
   });
 
   it('returns a fresh set of loaders (and cache) on every call', () => {
-    const { skillService, experienceService, projectService } =
-      makeServices();
+    const { skillService, experienceService, projectService } = makeServices();
 
-    const first = createLoaders(skillService, experienceService, projectService);
+    const first = createLoaders(
+      skillService,
+      experienceService,
+      projectService,
+    );
     const second = createLoaders(
       skillService,
       experienceService,

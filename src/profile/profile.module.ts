@@ -3,6 +3,6 @@ import { ProfileService } from './profile.service.js';
 import { ProfileResolver } from './profile.resolver.js';
 
 @Module({
-  providers: [ProfileService, ProfileResolver]
+  providers: [ProfileService, ProfileResolver],
 })
 export class ProfileModule {}

@@ -28,7 +28,9 @@ export function createLoaders(
       return groupByProfileId(profileIds, rows);
     }),
     experienceByProfileId: new DataLoader(async (profileIds) => {
-      const rows = await experienceService.findManyByProfileIds([...profileIds]);
+      const rows = await experienceService.findManyByProfileIds([
+        ...profileIds,
+      ]);
       return groupByProfileId(profileIds, rows);
     }),
     projectsByProfileId: new DataLoader(async (profileIds) => {

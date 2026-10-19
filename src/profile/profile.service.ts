@@ -11,9 +11,7 @@ export class ProfileService {
     });
 
     if (!profile) {
-      throw new NotFoundException(
-        'Profile is not found — check that the database seed has run',
-      );
+      throw new NotFoundException('Profile is not found');
     }
 
     return profile;
