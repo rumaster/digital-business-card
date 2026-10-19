@@ -11,10 +11,12 @@ import { ExperienceService } from './experience/experience.service.js';
 import { ProjectModule } from './project/project.module.js';
 import { ProjectService } from './project/project.service.js';
 import { createLoaders } from './common/dataloader/create-loaders.js';
+import { HealthModule } from './health/health.module.js';
 
 @Module({
   imports: [
     PrismaModule,
+    HealthModule,
     ProfileModule,
     SkillModule,
     ExperienceModule,
