@@ -32,6 +32,8 @@ COPY --chown=node:node prisma.config.ts ./
 COPY --chown=node:node docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
 
+RUN chown node:node /app
+
 USER node
 
 EXPOSE 3000
